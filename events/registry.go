@@ -66,3 +66,15 @@ func ByPackage(packageName string) map[string]Action {
 	}
 	return ret
 }
+
+// MatchRule returns true if the name of an action matches a given rule.
+func MatchRule(name string, rule string) bool {
+	parts := strings.Split(name, ".")
+	l := len(parts)
+	if l == 0 {
+		return false
+	}
+
+	rule = strings.ReplaceAll(rule, " ", "")
+	return strings.ToLower(parts[l-1]) == strings.ToLower(rule)
+}
